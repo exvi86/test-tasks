@@ -39,6 +39,7 @@ template "/usr/lib/systemd/system/jboss.service" do
         :jboss_user => jboss_user,
         :jboss_path => jboss_path
     })
+end
 
 template "#{jboss_path}/jboss-eap-6.4/standalone/configuration/standalone.xml" do
     source "standalone.xml.erb"
