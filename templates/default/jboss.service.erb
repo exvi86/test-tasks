@@ -1,0 +1,13 @@
+[Unit]
+Description=JBoss Service
+After=network.target
+
+[Service]
+Type=simple
+User=<%= @jboss_user %>
+ExecStart=<%= @jboss_path %>/jboss-eap-6.4/bin/standalone.sh
+Restart=on-abort
+
+
+[Install]
+WantedBy=multi-user.target
