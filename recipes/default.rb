@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe "java_se"
+
 jboss_source = node['jboss']['source']
 jboss_file = node['jboss']['file']
 jboss_path = node['jboss']['path']
@@ -52,6 +54,7 @@ template "#{jboss_path}/jboss-eap-6.4/standalone/configuration/standalone.xml" d
 end
 
 service 'jboss' do
+    provider Chef::Provider::Service::Init::Redhat
     action :nothing
 end
 
