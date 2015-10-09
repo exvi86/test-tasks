@@ -1,0 +1,10 @@
+DEPENDENCIES
+  java_se (~> 8.60.9)
+  test-tasks
+    path: .
+    metadata: true
+
+GRAPH
+  java_se (8.60.9)
+  test-tasks (0.1.0)
+    java_se (>= 0.0.0)
