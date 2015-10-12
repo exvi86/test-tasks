@@ -1,0 +1,163 @@
+> knife solo bootstrap root@192.168.33.10
+Bootstrapping Chef...
+root@192.168.33.10's password: 
+root@192.168.33.10's password: 
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 18736  100 18736    0     0   2810      0  0:00:06  0:00:06 --:--:--  4612
+Downloading Chef 12.5.1 for el...
+downloading https://www.opscode.com/chef/metadata?v=12.5.1&prerelease=false&nightlies=false&p=el&pv=7&m=x86_64
+  to file /tmp/install.sh.13911/metadata.txt
+trying curl...
+url     https://opscode-omnibus-packages.s3.amazonaws.com/el/7/x86_64/chef-12.5.1-1.el7.x86_64.rpm
+md5     9333136ba8a11bd6cad6d28fcd26a2c7
+sha256  7a937d8c0ab68a1f342aba4ad33417fc4ba8cb1a71f46e4a18b5e76c363e4075
+downloaded metadata file looks valid...
+downloading https://opscode-omnibus-packages.s3.amazonaws.com/el/7/x86_64/chef-12.5.1-1.el7.x86_64.rpm
+  to file /tmp/install.sh.13911/chef-12.5.1-1.el7.x86_64.rpm
+trying curl...
+Comparing checksum with sha256sum...
+Installing Chef 12.5.1
+installing with rpm...
+предупреждение: /tmp/install.sh.13911/chef-12.5.1-1.el7.x86_64.rpm: Заголовок V4 DSA/SHA1 Signature, key ID 83ef826a: NOKEY
+Подготовка...               ################################# [100%]
+Обновление / установка...
+   1:chef-12.5.1-1.el7                ################################# [100%]
+Thank you for installing Chef!
+Running Chef on 192.168.33.10...
+Installing Berkshelf cookbooks to '/home/exclusive.virus/.berkshelf/knife-solo/07a566ab7253fe9de475f1a0e390b742ce8a355e'...
+Resolving cookbook dependencies...
+Fetching 'test-tasks' from source at cookbooks/test-tasks
+Using test-tasks (0.1.0) from source at cookbooks/test-tasks
+Using java_se (8.60.9)
+Vendoring java_se (8.60.9) to /home/exclusive.virus/.berkshelf/knife-solo/07a566ab7253fe9de475f1a0e390b742ce8a355e/java_se
+Vendoring test-tasks (0.1.0) to /home/exclusive.virus/.berkshelf/knife-solo/07a566ab7253fe9de475f1a0e390b742ce8a355e/test-tasks
+Uploading the kitchen...
+root@192.168.33.10's password: 
+root@192.168.33.10's password: 
+mux_client_request_session: read from master failed: Broken pipe
+root@192.168.33.10's password: 
+Permission denied, please try again.
+root@192.168.33.10's password: 
+Generating solo config...
+Running Chef: sudo chef-solo -c ~/chef-solo/solo.rb -j ~/chef-solo/dna.json
+Starting Chef Client, version 12.5.1
+Compiling Cookbooks...
+Recipe: java_se::_download_java
+  * chef_gem[open_uri_redirections] action install
+    - install version 0.2.1 of package open_uri_redirections
+  Converging 21 resources
+  * chef_gem[open_uri_redirections] action install (up to date)
+  * ruby_block[fetch http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.tar.gz] action run
+    - execute the ruby block fetch http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.tar.gz
+  * ruby_block[validate /var/chef/cache/jdk-8u60-linux-x64.tar.gz] action run
+    - execute the ruby block validate /var/chef/cache/jdk-8u60-linux-x64.tar.gz
+Recipe: java_se::_linux_install
+  * ruby_block[set-env-java-home] action run
+    - execute the ruby block set-env-java-home
+  * directory[/etc/profile.d] action create (up to date)
+  * file[/etc/profile.d/jdk.sh] action create
+    - create new file /etc/profile.d/jdk.sh
+    - update content in file /etc/profile.d/jdk.sh from none to 26187d
+    --- /etc/profile.d/jdk.sh   2015-10-12 07:29:18.471815839 -0400
+    +++ /etc/profile.d/.jdk.sh20151012-14451-1sqncfr    2015-10-12 07:29:18.471815839 -0400
+    @@ -1 +1,2 @@
+    +export JAVA_HOME=/usr/lib/jvm/java
+    - change mode from '' to '0755'
+    - restore selinux security context
+  * ruby_block[set JAVA_HOME in /etc/environment] action run (skipped due to only_if)
+  * yum_package[glibc] action install (skipped due to only_if)
+  * yum_package[tar] action install (up to date)
+  * ruby_block[adding java to /usr/lib/jvm/jdk1.8.0_60] action run
+    - execute the ruby block adding java to /usr/lib/jvm/jdk1.8.0_60
+  * template[adding /usr/lib/jvm/.java.jinfo for debian] action create (skipped due to only_if)
+  * ruby_block[symlink /usr/lib/jvm/jdk1.8.0_60 to /usr/lib/jvm/java] action run
+    - execute the ruby block symlink /usr/lib/jvm/jdk1.8.0_60 to /usr/lib/jvm/java
+  * ruby_block[update-alternatives] action run
+    - execute the ruby block update-alternatives
+Recipe: test-tasks::default
+  * yum_package[unzip] action install
+    - install version 6.0-15.el7 of package unzip
+  * remote_file[jboss-eap-6.4.0.zip] action create
+    - create new file jboss-eap-6.4.0.zip
+    - update content in file jboss-eap-6.4.0.zip from none to 27a6fd
+    (file sizes exceed 10000000 bytes, diff output suppressed)
+    - change mode from '' to '0755'
+    - change owner from '' to 'vagrant'
+    - change group from '' to 'vagrant'
+    - restore selinux security context
+  * execute[unzip_jboss] action run
+    - execute /bin/unzip jboss-eap-6.4.0.zip -d /home/vagrant/jboss && /bin/chown -R vagrant:vagrant /home/vagrant/jboss
+  * template[/usr/lib/systemd/system/jboss.service] action create
+    - create new file /usr/lib/systemd/system/jboss.service
+    - update content in file /usr/lib/systemd/system/jboss.service from none to 9a833e
+    --- /usr/lib/systemd/system/jboss.service   2015-10-12 07:29:48.776814467 -0400
+    +++ /usr/lib/systemd/system/.jboss.service20151012-14451-1mkgdfu    2015-10-12 07:29:48.776814467 -0400
+    @@ -1 +1,14 @@
+    +[Unit]
+    +Description=JBoss Service
+    +After=network.target
+    +
+    +[Service]
+    +Type=simple
+    +User=vagrant
+    +ExecStart=/home/vagrant/jboss/jboss-eap-6.4/bin/standalone.sh
+    +Restart=on-abort
+    +
+    +
+    +[Install]
+    +WantedBy=multi-user.target
+    - change mode from '' to '0755'
+    - change owner from '' to 'root'
+    - change group from '' to 'root'
+    - restore selinux security context
+  * template[/home/vagrant/jboss/jboss-eap-6.4/standalone/configuration/standalone.xml] action create
+    - update content in file /home/vagrant/jboss/jboss-eap-6.4/standalone/configuration/standalone.xml from 92b749 to aaaf76
+    --- /home/vagrant/jboss/jboss-eap-6.4/standalone/configuration/standalone.xml       2015-03-27 14:26:24.000000000 -0400
+    +++ /home/vagrant/jboss/jboss-eap-6.4/standalone/configuration/.standalone.xml20151012-14451-r6g38x 2015-10-12 07:29:48.827814465 -0400
+    @@ -297,7 +297,7 @@
+             </subsystem>
+             <subsystem xmlns="urn:jboss:domain:webservices:1.2">
+                 <modify-wsdl-address>true</modify-wsdl-address>
+    -            <wsdl-host>${jboss.bind.address:127.0.0.1}</wsdl-host>
+    +            <wsdl-host>${jboss.bind.address:192.168.33.10}</wsdl-host>
+                 <endpoint-config name="Standard-Endpoint-Config"/>
+                 <endpoint-config name="Recording-Endpoint-Config">
+                     <pre-handler-chain name="recording-handlers" protocol-bindings="##SOAP11_HTTP ##SOAP11_HTTP_MTOM ##SOAP12_HTTP ##SOAP12_HTTP_MTOM">
+    @@ -313,7 +313,7 @@
+                 <inet-address value="${jboss.bind.address.management:127.0.0.1}"/>
+             </interface>
+             <interface name="public">
+    -            <inet-address value="${jboss.bind.address:127.0.0.1}"/>
+    +            <inet-address value="${jboss.bind.address:192.168.33.10}"/>
+             </interface>
+             <!-- TODO - only show this if the jacorb subsystem is added  -->
+             <interface name="unsecure">
+    - change mode from '0664' to '0755'
+    - restore selinux security context
+  * service[jboss] action nothing (skipped due to action :nothing)
+  * remote_file[testweb.zip] action create
+    - create new file testweb.zip
+    - update content in file testweb.zip from none to 596c0b
+    (new content is binary, diff output suppressed)
+    - change mode from '' to '0755'
+    - change owner from '' to 'vagrant'
+    - change group from '' to 'vagrant'
+    - restore selinux security context
+  * execute[unzip_app] action run
+    - execute /bin/unzip testweb.zip -d /home/vagrant/jboss/jboss-eap-6.4/standalone/deployments/testweb && /bin/chown -R vagrant:vagrant /home/vagrant/jboss/jboss-eap-6.4/standalone/deployments/testweb
+  * service[jboss] action restart
+    - restart service service[jboss]
+
+Running handlers:
+Running handlers complete
+
+Deprecated features used!
+  chef_gem[open_uri_redirections] chef_gem compile_time installation is deprecated at 1 location:
+    - /root/chef-solo/cookbooks-2/java_se/recipes/_download_java.rb:50:in `from_file'
+  chef_gem[open_uri_redirections] Please set `compile_time false` on the resource to use the new behavior. at 1 location:
+    - /root/chef-solo/cookbooks-2/java_se/recipes/_download_java.rb:50:in `from_file'
+  chef_gem[open_uri_redirections] or set `compile_time true` on the resource if compile_time behavior is required. at 1 location:
+    - /root/chef-solo/cookbooks-2/java_se/recipes/_download_java.rb:50:in `from_file'
+
+Chef Client finished, 16/23 resources updated in 18 minutes 45 seconds
