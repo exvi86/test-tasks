@@ -18,6 +18,10 @@ app_source = node['app']['source']
 app_path = node['app']['path']
 app_file = node['app']['file']
 
+yum_package 'unzip' do
+    action :install
+end
+
 remote_file "#{jboss_file}" do
     not_if {File.exists?(jboss_path)}
     source "#{jboss_source}"
